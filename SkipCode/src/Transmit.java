@@ -65,11 +65,41 @@ public class Transmit implements Encrypt{
 	
 	public void getA()
 	{
-		
+		count = 0;
+		while (count <=8)
+		{
+			byte temp = G(code.get(0));
+			code.set(0, element);
+			//G(0) xor code.get(3) xor temp
+			
+			for(int i=3; i>1; i++)
+			{
+				code.set(i, code.get(i-1));
+			}
+			count++;
+		}
 	}
 	
 	public void getB()
 	{
+		count = 0;
+		while (count <=8)
+		{
+			byte temp = G(code.get(0));
+			code.set(0, element);
+			//G(0) xor code.get(3) xor temp
+			
+			for(int i=3; i>1; i++)
+			{
+				code.set(i, code.get(i-1));
+			}
+			count++;
+		}
+	}
+	
+	public byte G(byte word)
+	{
 		
+		return 0;
 	}
 }
