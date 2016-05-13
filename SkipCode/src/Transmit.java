@@ -55,7 +55,58 @@ public class Transmit implements Encrypt{
 	
 	public ArrayList encrypt()
 	{
-		return null;
+		count = 1;
+		while (count <=8)
+		{
+			byte temp = G(code.get(0));
+			code.set(0, (byte) (temp^code.get(3)^count));
+			//G(0) xor code.get(3) xor temp
+			
+			code.set(3, code.get(2));
+			code.set(2, code.get(1));
+			code.set(1, (byte)temp);
+			
+			count++;
+		}
+		
+		while (count <=16)
+		{
+			byte temp = code.get(3);
+			
+			code.set(3, code.get(2));
+			code.set(2, (byte) (code.get(0)^code.get(1)^count));
+			code.set(1, G(code.get(0)));
+			code.set(0, temp);
+			
+			count++;
+		}
+		
+		while (count <=24)
+		{
+			byte temp = G(code.get(0));
+			code.set(0, (byte) (temp^code.get(3)^count));
+			//G(0) xor code.get(3) xor temp
+			
+			code.set(3, code.get(2));
+			code.set(2, code.get(1));
+			code.set(1, (byte)temp);
+			
+			count++;
+		}
+		
+		while (count <=32)
+		{
+			byte temp = code.get(3);
+			
+			code.set(3, code.get(2));
+			code.set(2, (byte) (code.get(0)^code.get(1)^count));
+			code.set(1, G(code.get(0)));
+			code.set(0, temp);
+			
+			count++;
+		}
+		
+		return code;
 	}
 	
 	public ArrayList decrypt()
@@ -63,36 +114,37 @@ public class Transmit implements Encrypt{
 		return null;
 	}
 	
-	public void getA()
+	public void stepA()
 	{
-		count = 0;
+		count = 1;
 		while (count <=8)
 		{
 			byte temp = G(code.get(0));
-			code.set(0, element);
+			code.set(0, (byte) (temp^code.get(3)^count));
 			//G(0) xor code.get(3) xor temp
 			
-			for(int i=3; i>1; i++)
-			{
-				code.set(i, code.get(i-1));
-			}
+			code.set(3, code.get(2));
+			code.set(2, code.get(1));
+			code.set(1, (byte)temp);
+			
 			count++;
 		}
 	}
 	
-	public void getB()
+	public void stepB()
 	{
-		count = 0;
+		count = 1;
 		while (count <=8)
 		{
 			byte temp = G(code.get(0));
-			code.set(0, element);
+			
+			code.set(3, code.get(2));
+			code.set(2, )
+			
+			code.set(0, (byte) (temp^code.get(3)^count));
 			//G(0) xor code.get(3) xor temp
 			
-			for(int i=3; i>1; i++)
-			{
-				code.set(i, code.get(i-1));
-			}
+			
 			count++;
 		}
 	}
